@@ -1,14 +1,28 @@
 import './App.css';
-import React from "react";
+import React, { useState } from 'react';
 import InitialScreen from './components/InitialScreen';
+import { Context } from './context/Context';
 
 function App() {
+
+  // Variables Globales
+  const [globalState, setGlobalState] = useState(null);
+
+  const handleGlobalState = (data) => {
+    setGlobalState(globalState => ({
+      ...globalState,
+      ...data
+    }));
+  }
+
   return (
-  <div style={styling} className="App">
-    <div style={{width: '100%', height: '100%'}}>
-      <InitialScreen />
-    </div>
-  </div>
+    <Context.Provider value={{globalState, handleGlobalState }}>
+      <div style={styling} className="App">
+        <div style={{width: '100%', height: '100%'}}>
+          <InitialScreen />
+        </div>
+      </div>
+  </Context.Provider>
   );
 }
 
