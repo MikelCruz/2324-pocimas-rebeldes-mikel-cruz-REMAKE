@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Context } from "../context/Context";
 import axios from "axios";
+import Alert from '@mui/material/Alert';
 
 import BattleScreen from "./BattleScreen";
 
@@ -11,6 +12,7 @@ function InitialScreen() {
 
   // Variables locales 
   const [isInTheGame, setIsInTheGame] = useState (false) 
+  const [errorInData, setErrorInData] = useState (false) 
 
   useEffect(() => { 
     console.log("Global State: ")
@@ -26,6 +28,8 @@ function InitialScreen() {
       setIsInTheGame(true)
   
     } catch (error) {
+      // Booleana para mostrar el error al no cargar la operacion de getPotions
+      setErrorInData(true)
       console.error(error);
     }
   } 
@@ -37,6 +41,12 @@ function InitialScreen() {
      <div>
        <h1> LAS POCIMAS REBELDES </h1>
        <button style={Botton} onClick={getPotions}> ENTER </button>
+
+       {errorInData &&  (
+          <Alert severity="error">No se han podido cargar los elementos. Recarga la Página o ponte en contacto con tu superior</Alert>
+        )}
+
+
      </div>
     )}
 
