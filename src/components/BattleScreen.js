@@ -94,8 +94,6 @@ function BattleScreen() {
     const curativePenalization = selectedCurativeDice.value * 0.1;
     const nonCurativePenalization = selectedNonCurativeDice.value * 0.1;
 
-    console.log(selectedCurativeDice);
-
     // El cálculo estará en formato string por lo que tendrás que utilizar parseFloat
     const curativeResult = ((curativePenalization * selectedCurativePotion.power) / selectedCurativePotion.mana).toFixed(2);
     const nonCurativeResult = ((nonCurativePenalization * selectedNonCurativePotion.power) / selectedNonCurativePotion.mana).toFixed(2);

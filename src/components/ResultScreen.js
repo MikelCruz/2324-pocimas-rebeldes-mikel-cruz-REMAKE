@@ -18,11 +18,11 @@ function ResultScreen() {
 
   // UseState de informacion
   useEffect(() => { 
-    console.log("Winner Potion:")
-    console.log(winnerPotion)
+    // console.log("Winner Potion:")
+    // console.log(winnerPotion)
 
-    console.log("Looser Potion:")
-    console.log(looserPotion)
+    // console.log("Looser Potion:")
+    // console.log(looserPotion)
   }, [winnerPotion, looserPotion])
 
 
@@ -42,7 +42,6 @@ function ResultScreen() {
   }
 
   const handleRelaunchBattle = () => {
-    console.log("Relaunch the battle")
     setRandomPotionNumber(Math.floor(Math.random() * (potionsGlobalState.length/2)))
     setShowResultScreent(false) // Reinicio la batalla
   }
