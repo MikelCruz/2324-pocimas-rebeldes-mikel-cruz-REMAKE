@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Context } from "../context/Context";
+import ResultScreen from "../components/ResultScreen"
 
 // Rutas de imagenes
 import curativeImage from '../assets/curative_potion.png'
@@ -15,6 +16,7 @@ function BattleScreen() {
 
   //Variables globales
   const {potionsGlobalState, setPotionsGlobalState} = useContext(Context);
+  const {showResultScreen, setShowResultScreent} = useContext(Context);
 
   // Variables locales 
   const [selectedCurativeDice, setSelectedCurativeDice] = useState ()
@@ -37,7 +39,9 @@ function BattleScreen() {
 
     // console.log("Curative Potion");
     // console.log(selectedCurativePotion);
-  }, [selectedCurativePotion, selectedCurativeDice])
+
+    console.log("Show Result Screen? " + showResultScreen)
+  }, [selectedCurativePotion, selectedCurativeDice, showResultScreen])
  
 
   // Funcion que escoge un dado aleatorio
@@ -76,7 +80,7 @@ function BattleScreen() {
 
 
   const handleBattle = () => {
-    console.log("Handle battle button pressed")
+    setShowResultScreent(true);
   }
 
   // Devuelve null si no se ha cargado los datos correspondientes
@@ -87,41 +91,50 @@ function BattleScreen() {
   return (
 
   <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-    <h1>Resultados Intermedios</h1>
+    {!showResultScreen &&  (
+    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+      <h1>Resultados Intermedios</h1>
+    
+      <div style={ mainContainer }>
 
-    <div style={ mainContainer }>
+        {/* Bloque de Poción Curativa */}
+        <div style={{ width: '45%'}}>
+          <img src={curativeImage} alt="curativePotion" style={PotionImageStyle} />
+          <img src={selectedCurativeDice.dice} alt="curativeDice" style={DiceImageStyle} />
 
-      {/* Bloque de Poción Curativa */}
-      <div style={{ width: '45%'}}>
-        <img src={curativeImage} alt="curativePotion" style={PotionImageStyle} />
-        <img src={selectedCurativeDice.dice} alt="curativeDice" style={DiceImageStyle} />
+          <div style={{ border: '4px solid', padding: '10px' }}>
+            <h2>Name: {selectedCurativePotion.name}</h2>
+            <h2>Alias: {selectedCurativePotion.alias}</h2>
+            <h2>Curative: {selectedCurativePotion.curative.toString()}</h2>
+            <h2>Power: {selectedCurativePotion.power}</h2>
+            <h2>Mana: {selectedCurativePotion.mana}</h2>
+          </div>
+        </div>
 
-        <div style={{ border: '4px solid', padding: '10px' }}>
-          <h2>Name: {selectedCurativePotion.name}</h2>
-          <h2>Alias: {selectedCurativePotion.alias}</h2>
-          <h2>Curative: {selectedCurativePotion.curative.toString()}</h2>
-          <h2>Power: {selectedCurativePotion.power}</h2>
-          <h2>Mana: {selectedCurativePotion.mana}</h2>
+        {/* Bloque de Poción No Curativa */}
+        <div style={{ width: '45%' }}>
+          <img src={nonCurativeImage} alt="nonCurativePotion" style={PotionImageStyle} />
+          <img src={selectedNonCurativeDice.dice} alt="nonCurativeDice" style={DiceImageStyle} />
+
+          <div style={{ border: '4px solid', padding: '10px' }}>
+            <h2>Name: {selectedNonCurativePotion.name}</h2>
+            <h2>Alias: {selectedNonCurativePotion.alias}</h2>
+            <h2>Curative: {selectedNonCurativePotion.curative.toString()}</h2>
+            <h2>Power: {selectedNonCurativePotion.power}</h2>
+            <h2>Mana: {selectedNonCurativePotion.mana}</h2>
+          </div>
         </div>
       </div>
-
-      {/* Bloque de Poción No Curativa */}
-      <div style={{ width: '45%' }}>
-        <img src={nonCurativeImage} alt="nonCurativePotion" style={PotionImageStyle} />
-        <img src={selectedNonCurativeDice.dice} alt="nonCurativeDice" style={DiceImageStyle} />
-
-        <div style={{ border: '4px solid', padding: '10px' }}>
-          <h2>Name: {selectedNonCurativePotion.name}</h2>
-          <h2>Alias: {selectedNonCurativePotion.alias}</h2>
-          <h2>Curative: {selectedNonCurativePotion.curative.toString()}</h2>
-          <h2>Power: {selectedNonCurativePotion.power}</h2>
-          <h2>Mana: {selectedNonCurativePotion.mana}</h2>
-        </div>
-      </div>
-    </div>
-
+    
+    
   {/* Botón de Lanzar Batalla */}
   <button style={BottonStyle} onClick={handleBattle}>LAUNCH BATTLE</button>
+  </div>
+  )}
+  
+  {showResultScreen &&  (
+    <ResultScreen />   
+  )}
 </div>
   );
 }
@@ -129,7 +142,7 @@ function BattleScreen() {
 const BottonStyle = {
   width: '500px',
   height: '100px',
-  marginTop: '10%',
+  marginTop: '5%',
   alignItems: 'center',
   borderRadius: '3px',
   borderColor: 'rgba(1, 130, 214, 1)',
