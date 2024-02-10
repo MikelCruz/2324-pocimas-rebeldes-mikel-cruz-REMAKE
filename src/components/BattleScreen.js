@@ -45,8 +45,8 @@ function BattleScreen() {
 
     // console.log("Show Result Screen? " + showResultScreen)
 
-    console.log("Battle Result")
-    console.log(battleResult)
+    // console.log("Battle Result")
+    // console.log(battleResult)
 
   }, [selectedCurativePotion, selectedCurativeDice, 
       showResultScreen, battleResult])
@@ -91,12 +91,14 @@ function BattleScreen() {
 
   // Funcion que calculara la pocion ganadora y la perdedora
   const handleBattle = () => {
-    const curativePenalization = selectedCurativeDice.value * 0.1
-    const nonCurativePenalization = selectedNonCurativeDice.value * 0.1
+    const curativePenalization = selectedCurativeDice.value * 0.1;
+    const nonCurativePenalization = selectedNonCurativeDice.value * 0.1;
 
-    // El calculo estará en formato string por lo que tendre que utilizar parseFLoat
+    console.log(selectedCurativeDice);
+
+    // El cálculo estará en formato string por lo que tendrás que utilizar parseFloat
     const curativeResult = ((curativePenalization * selectedCurativePotion.power) / selectedCurativePotion.mana).toFixed(2);
-    const nonCurativeResult = ((nonCurativePenalization * selectedNonCurativePotion.power) / selectedCurativePotion.mana).toFixed(2);
+    const nonCurativeResult = ((nonCurativePenalization * selectedNonCurativePotion.power) / selectedNonCurativePotion.mana).toFixed(2);
 
     const ResultData = [];
 

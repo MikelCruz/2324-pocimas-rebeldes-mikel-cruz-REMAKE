@@ -66,7 +66,7 @@ function ResultScreen() {
               <h2>DICE RESULT <img src={winnerPotion.dice.dice} alt="curativeDice" style={ImageStyle} /></h2>
               <h2 style={{ color: 'red' }}>{winnerPotion.dice.value} x 0.1 = {winnerPotion.dice.penalization.toFixed(2)}</h2>
               <h2>TOTAL SCORE </h2>
-              <h2>{winnerPotion.dice.penalization.toFixed(2)}x {winnerPotion.potion.power} / {winnerPotion.potion.mana} = {winnerPotion.result}</h2>
+              <h2>{winnerPotion.dice.penalization.toFixed(2)} x {winnerPotion.potion.power} / {winnerPotion.potion.mana} = {winnerPotion.result}</h2>
             </div>
           </div>
 
@@ -77,7 +77,7 @@ function ResultScreen() {
               <h2>DICE RESULT <img src={looserPotion.dice.dice} alt="nonCurativeDice" style={ImageStyle} /></h2>
               <h2 style={{ color: 'red' }}>{looserPotion.dice.value} x 0.1 = {looserPotion.dice.penalization.toFixed(2)}</h2>
               <h2>TOTAL SCORE </h2>
-              <h2>{looserPotion.dice.penalization.toFixed(2)}x {looserPotion.potion.power} / {looserPotion.potion.mana} = {looserPotion.result}</h2>
+              <h2>{looserPotion.dice.penalization.toFixed(2)} x {looserPotion.potion.power} / {looserPotion.potion.mana} = {looserPotion.result}</h2>
             </div>
           </div>
         </div>
