@@ -15,7 +15,7 @@ import dice6 from '../assets/dice_6.png'
 function BattleScreen() {
 
   //Variables globales
-  const {potionsGlobalState, setPotionsGlobalState} = useContext(Context);
+  const {potionsGlobalState } = useContext(Context);
   const {showResultScreen, setShowResultScreent} = useContext(Context);
   const {battleResult, setBattleResult} = useContext(Context);
 
@@ -30,6 +30,7 @@ function BattleScreen() {
   useEffect(() => { 
     selectDice();
     selectedPotions();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
 
@@ -65,6 +66,7 @@ function BattleScreen() {
     return {
       dice: dices[randomNumber],
       value: randomNumber + 1, // Hacemos +1 ya que el array cuenta desde 0, pero el valor es 1 en la posicion 0
+      penalization: (randomNumber + 1 ) * 0.1
     };
   };
   
@@ -97,14 +99,14 @@ function BattleScreen() {
 
     if (parseFloat(curativeResult) > parseFloat(nonCurativeResult)) {
 
-      const winner = { win: true, potion: selectedCurativePotion, dice: selectedCurativeDice }
-      const looser = { win: false, potion: selectedNonCurativePotion, dice: selectedNonCurativeDice }
+      const winner = { win: true, potion: selectedCurativePotion, dice: selectedCurativeDice, result: parseFloat(curativeResult) }
+      const looser = { win: false, potion: selectedNonCurativePotion, dice: selectedNonCurativeDice, result: parseFloat(nonCurativeResult)}
       ResultData.push(winner, looser)
 
     } else if (parseFloat(curativeResult) < parseFloat(nonCurativeResult)) {
 
-      const winner = { win: true, potion: selectedNonCurativePotion, dice: selectedNonCurativeDice }
-      const looser = { win: false, potion: selectedCurativePotion, dice: selectedCurativeDice }
+      const winner = { win: true, potion: selectedNonCurativePotion, dice: selectedNonCurativeDice, result: parseFloat(nonCurativeResult) }
+      const looser = { win: false, potion: selectedCurativePotion, dice: selectedCurativeDice, result: parseFloat(curativeResult) }
 
       ResultData.push(winner, looser)
 
