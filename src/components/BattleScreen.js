@@ -17,6 +17,7 @@ function BattleScreen() {
   //Variables globales
   const {potionsGlobalState, setPotionsGlobalState} = useContext(Context);
   const {showResultScreen, setShowResultScreent} = useContext(Context);
+  const {battleResult, setBattleResult} = useContext(Context);
 
   // Variables locales 
   const [selectedCurativeDice, setSelectedCurativeDice] = useState ()
@@ -40,8 +41,13 @@ function BattleScreen() {
     // console.log("Curative Potion");
     // console.log(selectedCurativePotion);
 
-    console.log("Show Result Screen? " + showResultScreen)
-  }, [selectedCurativePotion, selectedCurativeDice, showResultScreen])
+    // console.log("Show Result Screen? " + showResultScreen)
+
+    console.log("Battle Result")
+    console.log(battleResult)
+
+  }, [selectedCurativePotion, selectedCurativeDice, 
+      showResultScreen, battleResult])
  
 
   // Funcion que escoge un dado aleatorio
@@ -78,8 +84,35 @@ function BattleScreen() {
   
   };
 
-
+  // Funcion que calculara la pocion ganadora y la perdedora
   const handleBattle = () => {
+    const curativePenalization = selectedCurativeDice.value * 0.1
+    const nonCurativePenalization = selectedNonCurativeDice.value * 0.1
+
+    // El calculo estará en formato string por lo que tendre que utilizar parseFLoat
+    const curativeResult = ((curativePenalization * selectedCurativePotion.power) / selectedCurativePotion.mana).toFixed(2);
+    const nonCurativeResult = ((nonCurativePenalization * selectedNonCurativePotion.power) / selectedCurativePotion.mana).toFixed(2);
+
+    const ResultData = [];
+
+    if (parseFloat(curativeResult) > parseFloat(nonCurativeResult)) {
+
+      const winner = { win: true, potion: selectedCurativePotion, dice: selectedCurativeDice }
+      const looser = { win: false, potion: selectedNonCurativePotion, dice: selectedNonCurativeDice }
+      ResultData.push(winner, looser)
+
+    } else if (parseFloat(curativeResult) < parseFloat(nonCurativeResult)) {
+
+      const winner = { win: true, potion: selectedNonCurativePotion, dice: selectedNonCurativeDice }
+      const looser = { win: false, potion: selectedCurativePotion, dice: selectedCurativeDice }
+
+      ResultData.push(winner, looser)
+
+    } else {
+      console.log("Los resultados son iguales.");
+    }
+
+    setBattleResult(ResultData);
     setShowResultScreent(true);
   }
 

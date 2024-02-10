@@ -8,6 +8,7 @@ function App() {
   // Variables Globales
   const [potionsGlobalState, setPotionsGlobalState] = useState(null);
   const [showResultScreen, setShowResultScreent] = useState(false);
+  const [battleResult, setBattleResult] = useState(null);
 
   const handleGlobalState = (data) => {
     setPotionsGlobalState(potionsGlobalState => ({
@@ -19,7 +20,8 @@ function App() {
   return (
     <Context.Provider value={{
       potionsGlobalState, setPotionsGlobalState, handleGlobalState, 
-      showResultScreen, setShowResultScreent
+      showResultScreen, setShowResultScreent,
+      battleResult, setBattleResult
     }}>
       <div style={styling} className="App">
         <div style={{width: '100%', height: '100%'}}>
