@@ -6,7 +6,7 @@ import axios from "axios";
 function InitialScreen() {
 
   //Variables globales
-  const {globalState, setGlobalState} = useContext(Context);
+  const {potionGlobalState, setPotionGlobalState} = useContext(Context);
 
 
   // Variables locales 
@@ -14,16 +14,16 @@ function InitialScreen() {
 
   useEffect(() => { 
     console.log("Global State: ")
-    console.log(globalState);
+    console.log(potionGlobalState);
 
-  }, [globalState])
+  }, [potionGlobalState])
 
   const getPotions = async () => {
     try{
       const url = "https://gist.githubusercontent.com/Oskar-Dam/ad2c96601e79ad108227bc25f90e4e53/raw/25dc0198b2aaa85f0b5583978a0c6772cab63aba/Potions.js"
       const data = await axios.get(url);
-      setGlobalState(data.data)
-      // setRecivedData(data.data)
+      setPotionGlobalState(data.data)
+      
   
     } catch (error) {
       console.error(error);

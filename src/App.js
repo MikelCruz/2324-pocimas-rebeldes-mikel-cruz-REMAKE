@@ -6,17 +6,17 @@ import { Context } from './context/Context';
 function App() {
 
   // Variables Globales
-  const [globalState, setGlobalState] = useState(null);
+  const [potionGlobalState, setPotionGlobalState] = useState(null);
 
   const handleGlobalState = (data) => {
-    setGlobalState(globalState => ({
-      ...globalState,
+    setPotionGlobalState(potionGlobalState => ({
+      ...potionGlobalState,
       ...data
     }));
   }
 
   return (
-    <Context.Provider value={{globalState, handleGlobalState }}>
+    <Context.Provider value={{potionGlobalState, setPotionGlobalState, handleGlobalState }}>
       <div style={styling} className="App">
         <div style={{width: '100%', height: '100%'}}>
           <InitialScreen />
