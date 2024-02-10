@@ -8,23 +8,23 @@ import BattleScreen from "./BattleScreen";
 function InitialScreen() {
 
   //Variables globales
-  const {potionGlobalState, setPotionGlobalState} = useContext(Context);
+  const {potionsGlobalState, setPotionsGlobalState} = useContext(Context);
 
   // Variables locales 
   const [isInTheGame, setIsInTheGame] = useState (false) 
   const [errorInData, setErrorInData] = useState (false) 
 
   useEffect(() => { 
-    console.log("Global State: ")
-    console.log(potionGlobalState);
+    // console.log("Global State: ")
+    // console.log(potionsGlobalState);
 
-  }, [potionGlobalState])
+  }, [potionsGlobalState])
 
   const getPotions = async () => {
     try{
       const url = "https://gist.githubusercontent.com/Oskar-Dam/ad2c96601e79ad108227bc25f90e4e53/raw/25dc0198b2aaa85f0b5583978a0c6772cab63aba/Potions.js"
       const data = await axios.get(url);
-      setPotionGlobalState(data.data)
+      setPotionsGlobalState(data.data)
       setIsInTheGame(true)
   
     } catch (error) {
