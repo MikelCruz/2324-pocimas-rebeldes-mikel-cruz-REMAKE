@@ -7,8 +7,10 @@ import nonCurativeImage from '../assets/poison_potion.png'
 function ResultScreen() {
 
   // Variables globales
+  const {potionsGlobalState } = useContext(Context);
   const {showResultScreen, setShowResultScreent} = useContext(Context);
   const {battleResult } = useContext(Context);
+  const {setRandomPotionNumber} = useContext(Context);
 
   // Variables locales
   const [winnerPotion, setWinnerPotion] = useState(null)
@@ -41,6 +43,7 @@ function ResultScreen() {
 
   const handleRelaunchBattle = () => {
     console.log("Relaunch the battle")
+    setRandomPotionNumber(Math.floor(Math.random() * (potionsGlobalState.length/2)))
     setShowResultScreent(false) // Reinicio la batalla
   }
 

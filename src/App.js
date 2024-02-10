@@ -9,6 +9,7 @@ function App() {
   const [potionsGlobalState, setPotionsGlobalState] = useState(null);
   const [showResultScreen, setShowResultScreent] = useState(false);
   const [battleResult, setBattleResult] = useState(null);
+  const [randomPotionNumber, setRandomPotionNumber] = useState(0);
 
   const handleGlobalState = (data) => {
     setPotionsGlobalState(potionsGlobalState => ({
@@ -21,7 +22,8 @@ function App() {
     <Context.Provider value={{
       potionsGlobalState, setPotionsGlobalState, handleGlobalState, 
       showResultScreen, setShowResultScreent,
-      battleResult, setBattleResult
+      battleResult, setBattleResult,
+      randomPotionNumber, setRandomPotionNumber
     }}>
       <div style={styling} className="App">
         <div style={{width: '100%', height: '100%'}}>

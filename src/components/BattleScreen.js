@@ -18,6 +18,7 @@ function BattleScreen() {
   const {potionsGlobalState } = useContext(Context);
   const {showResultScreen, setShowResultScreent} = useContext(Context);
   const {battleResult, setBattleResult} = useContext(Context);
+  const {randomPotionNumber} = useContext(Context);
 
   // Variables locales 
   const [selectedCurativeDice, setSelectedCurativeDice] = useState ()
@@ -29,9 +30,9 @@ function BattleScreen() {
   // UseEffect Inicial
   useEffect(() => { 
     selectDice();
-    selectedPotions();
+    selectedPotions(randomPotionNumber);
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, [randomPotionNumber])
 
 
   // Use Effect de informacion
@@ -72,17 +73,19 @@ function BattleScreen() {
   
 
   // Funcion que escoge las pociones para la batalla
-  const selectedPotions = () => {
+  const selectedPotions = (randomNumber) => {
 
     // Filtrado de pociones curativas
     const curativePotionsArray = potionsGlobalState.filter((element) => element.curative === true);
   
     // Filtrado de pociones no curativas
     const nonCurativePotionsArray = potionsGlobalState.filter((element) => element.curative === false);
-  
+
     // Seleccionar aleatoriamente una poción curativa y no curativa
-    setSelectedCurativePotion( curativePotionsArray[Math.floor(Math.random() * curativePotionsArray.length)] );
-    setSelectedNonCurativePotion ( nonCurativePotionsArray[Math.floor(Math.random() * nonCurativePotionsArray.length)]) ;
+    randomNumber = Math.floor(Math.random() * curativePotionsArray.length);
+
+    setSelectedCurativePotion( curativePotionsArray[randomNumber] );
+    setSelectedNonCurativePotion ( nonCurativePotionsArray[randomNumber]) ;
   
   };
 
